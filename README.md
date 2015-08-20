@@ -25,8 +25,8 @@ consumer key, consumer secret, and callback URL.
     var VimeoStrategy = require('passport-vimeo').OAuth2Strategy;
 
     passport.use(new VimeoStrategy({
-        clientID: VIMEO_CONSUMER_KEY,
-        clientSecret: VIMEO_CONSUMER_SECRET,
+        clientID: VIMEO_CLIENT_ID,
+        clientSecret: VIMEO_CLIENT_SECRET,
         callbackURL: "http://127.0.0.1:3000/auth/vimeo/callback"
       },
       function(accessToken, refreshToken, profile, done) {
