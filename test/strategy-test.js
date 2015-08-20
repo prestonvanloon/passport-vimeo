@@ -29,7 +29,7 @@ vows.describe('VimeoStrategy').addBatch({
       function() {});
 
       // mock
-      strategy._oauth2.get = function(url, token, tokenSecret, callback) {
+      strategy._oauth2.get = function(url, token, callback) {
         var body = '{ \
             "uri": "/users/0123456789", \
             "name": "Brad Dougherty", \
@@ -100,7 +100,7 @@ vows.describe('VimeoStrategy').addBatch({
       function() {});
 
       // mock
-      strategy._oauth2.get = function(url, token, tokenSecret, callback) {
+      strategy._oauth2.get = function(url, token, callback) {
         callback(new Error('something went wrong'));
       }
 
