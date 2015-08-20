@@ -1,7 +1,7 @@
 # Passport-Vimeo
 
 [Passport](https://github.com/jaredhanson/passport) strategy for authenticating
-with [Vimeo](http://vimeo.com/) using the OAuth 1.0a API.
+with [Vimeo](http://vimeo.com/) using the OAuth 2.0 API.
 
 This module lets you authenticate using Vimeo in your Node.js applications.
 By plugging into Passport, Vimeo authentication can be easily and
@@ -22,12 +22,14 @@ OAuth tokens.  The strategy requires a `verify` callback, which accepts these
 credentials and calls `done` providing a user, as well as `options` specifying a
 consumer key, consumer secret, and callback URL.
 
+    var VimeoStrategy = require('passport-vimeo').OAuth2Strategy;
+
     passport.use(new VimeoStrategy({
-        consumerKey: VIMEO_CONSUMER_KEY,
-        consumerSecret: VIMEO_CONSUMER_SECRET,
+        clientID: VIMEO_CONSUMER_KEY,
+        clientSecret: VIMEO_CONSUMER_SECRET,
         callbackURL: "http://127.0.0.1:3000/auth/vimeo/callback"
       },
-      function(token, tokenSecret, profile, done) {
+      function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({ vimeoId: profile.id }, function (err, user) {
           return done(err, user);
         });
@@ -44,8 +46,8 @@ application:
 
     app.get('/auth/vimeo',
       passport.authenticate('vimeo'));
-    
-    app.get('/auth/vimeo/callback', 
+
+    app.get('/auth/vimeo/callback',
       passport.authenticate('vimeo', { failureRedirect: '/login' }),
       function(req, res) {
         // Successful authentication, redirect home.
@@ -66,6 +68,7 @@ For a complete, working example, refer to the [login example](https://github.com
 ## Credits
 
   - [Jared Hanson](http://github.com/jaredhanson)
+  - [Preston Van Loon](http://github.com/prestonvanloon)
 
 ## License
 
